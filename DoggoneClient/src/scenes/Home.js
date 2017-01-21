@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { Button } from 'react-native-material-ui';
 
 export default class SceneHome extends Component {
@@ -7,9 +7,10 @@ export default class SceneHome extends Component {
     return (
       <View>
         <Button
-          raised primary
+          raised accent
           text='I found a dog!'
           icon='photo-camera'
+          style={{ container: styles.mainButton }}
           onPress={() => {
             this.props.navigator.to('camera', {
               nextScene: 'recognized'
@@ -20,12 +21,23 @@ export default class SceneHome extends Component {
           raised accent
           text='I lost my dog!'
           icon='insert-photo'
+          style={{ container: styles.mainButton }}
         />
         <Button
           text='Browse lost dogs'
-          icon=''
+          icon='search'
+          onPress={() => {
+            this.props.navigator.to('browse');
+          }}
         />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  mainButton: {
+    height: 128,
+    marginBottom: 16
+  }
+});

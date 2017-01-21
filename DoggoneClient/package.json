@@ -10,7 +10,8 @@
 		"react": "~15.4.0-rc.4",
 		"react-native": "0.40.0",
 		"react-native-camera": "https://github.com/lwansbrough/react-native-camera.git",
-		"react-native-material-ui": "^1.6.0"
+		"react-native-material-ui": "^1.6.0",
+		"titlecase": "^1.1.2"
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",

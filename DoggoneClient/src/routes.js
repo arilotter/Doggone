@@ -13,7 +13,7 @@ export default {
     component: require('./scenes/LostDogRecognized').default
   },
   browse: {
-    title: 'Browse lost dogs',
+    title: 'Browse dogs',
     component: require('./scenes/BrowseDogs').default
   }
-}
+};

@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, Dimensions } from 'react-native';
 import { Card } from 'react-native-material-ui';
 
 const styles = StyleSheet.create({
   textContainer: {
-    paddingHorizontal: 16,
-    paddingBottom: 16
+    padding: 8
   },
   card: {
-    width: 256
+    width: (Dimensions.get('window').width / 2) - 32,
+    maxWidth: 256,
+    height: 256
   },
   cardTitle: {
     fontSize: 26
@@ -26,7 +27,7 @@ class DogCard extends Component {
         style={{container: styles.card}}
       >
         <Image
-          source={{uri: this.props.dog.photo}}
+          source={{uri: 'https://server.com/woof/' + this.props.dog.uuid + '.jpg'}}
           style={styles.image}
         />
         <View style={styles.textContainer}>

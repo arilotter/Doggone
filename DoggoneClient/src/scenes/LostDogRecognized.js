@@ -15,31 +15,29 @@ class SceneLostDogRecognized extends Component {
 
   render () {
     const dogs = [{
-      key: 'asdasfasdf',
-      breed: 'Bulldog',
+      uuid: 'asdasfasdf',
+      usr_type: 'American Staffordshire Terrier',
       photo: 'http://i.imgur.com/A79quK6.png'
     }, {
-      key: 'asdflkjg4',
-      breed: 'Corgi',
+      uuid: 'asdflkjg4',
+      usr_type: 'Corgi',
       photo: 'http://i.imgur.com/A79quK6.png'
     }, {
-      key: 'dfklgj90',
+      uuid: 'dfklgj90',
       name: 'Borkley',
-      breed: 'Chihuahua',
+      usr_type: 'Chihuahua',
       photo: 'http://i.imgur.com/A79quK6.png'
-    }
-    ];
+    }]; // TODO IMLPEMENT API HERE
 
     const dogCards = dogs.map(dog => (
       <DogCard
-        key={dog.key}
+        key={dog.uuid}
         dog={dog}
         onPress={this.openDogDetails}
       />
     ));
-    console.log(this.props);
     return (
-      <View>
+      <ScrollView>
         <Image
           style={styles.dogPhoto}
           source={{
@@ -48,12 +46,10 @@ class SceneLostDogRecognized extends Component {
         />
         <Text style={styles.infoText}>This dog looks like a</Text>
         <Text style={styles.infoBreed}> {this.props.breed}</Text>
-        <View style={{ height: 192 }}>
-          <ScrollView horizontal>
-            {dogCards}
-          </ScrollView>
+        <View style={styles.dogsContainer}>
+          {dogCards}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -73,11 +69,14 @@ const styles = StyleSheet.create({
     padding: 8,
     paddingTop: 0,
     color: 'black'
+  },
+  dogsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
   }
 });
 
 SceneLostDogRecognized.propTypes = {
-  breed: React.PropTypes.string.isRequired,
   photo: React.PropTypes.string.isRequired
 };
 

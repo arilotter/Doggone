@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, UIManager, Navigator, View } from 'react-native';
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 import Navigate from './src/Navigate';
-import Toolbar from './src/components/Toolbar'
+import Toolbar from './src/components/Toolbar';
 
 const uiTheme = {
   palette: {
