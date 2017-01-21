@@ -1,5 +1,4 @@
 from flask import Flask, request
-from firebase import firebase
 from DoggoneUtils import *
 import os
 import sys
@@ -8,9 +7,6 @@ import json
 from json import encoder
 import pymongo
 from pymongo import MongoClient
-
-
-#firebase = firebase.FirebaseApplication("https://dogone-a3869.firebaseio.com", None)
 
 app = Flask(__name__)
 
@@ -71,6 +67,9 @@ def upload():
             "data_id": data_id,
             "classify": classification
         }
+
+        with open(os.path.join(root_path(), "woof", data_id + ".jpg"), "wb") as f:
+            f.write(request.data)
         return json.dumps(dog_data)
 
 @app.route('/lost', methods=['POST'])
