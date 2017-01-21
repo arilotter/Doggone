@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import { ActionButton } from 'react-native-material-ui';
 
 import Camera from 'react-native-camera';
 
@@ -11,16 +12,17 @@ export default class Home extends Component {
           ref={cam => {
             this.camera = cam;
           }}
-          style={styles.preview}
+          style={styles.viewfinder}
           aspect={Camera.constants.Aspect.fill}
           captureTarget={Camera.constants.CaptureTarget.temp}
         >
-          <Text
-            style={styles.capture}
+          <ActionButton
             onPress={this.takePicture.bind(this)}
-          >
-            [CAPTURE]
-          </Text>
+            icon="camera"
+            style={{
+              shutter: styles.shutter
+            }}
+          />
         </Camera>
       </View>
     );
@@ -36,19 +38,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
+  viewfinder: {
     height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width
+    width: Dimensions.get('window').width,
+    flex: 1,
+    justifyContent: 'center'
   },
-  capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    color: '#000',
-    padding: 10,
-    margin: 40
+  shutter: {
   }
 });
