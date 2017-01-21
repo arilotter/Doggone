@@ -4,7 +4,7 @@ import { ActionButton } from 'react-native-material-ui';
 
 import Camera from 'react-native-camera';
 
-export default class Home extends Component {
+export default class DogCamera extends Component {
   render () {
     return (
       <View style={styles.container}>
@@ -18,7 +18,7 @@ export default class Home extends Component {
         >
           <ActionButton
             onPress={this.takePicture.bind(this)}
-            icon="camera"
+            icon='camera'
             style={{
               shutter: styles.shutter
             }}
@@ -27,9 +27,16 @@ export default class Home extends Component {
       </View>
     );
   }
+
   takePicture () {
     this.camera.capture()
-      .then(data => console.log(data))
+      .then(photo => {
+        console.log(photo.path);
+        this.props.navigator.to(this.props.nextScene, {
+          photo: photo.path,
+          breed: 'Big ol pupper'
+        });
+      })
       .catch(err => console.log(err));
   }
 }
