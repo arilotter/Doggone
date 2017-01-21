@@ -30,6 +30,9 @@ build/
 local.properties
 *.iml
 
+# Python
+__pycache__/
+
 # node.js
 #
 node_modules/
