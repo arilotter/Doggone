@@ -1,6 +1,5 @@
 import tensorflow as tf, sys
 from math import sin, cos, atan2, sqrt, radians
-from base64 import b64encode, b64decode
 import json
 
 def get_distance(lat1, lon1, lat2, lon2):
@@ -53,6 +52,6 @@ class Classifier():
             for node_id in top_k:
                 human_string = self.label_lines[node_id]
                 score = predictions[0][node_id]
-                print('%s (score = %.5f)' % (human_string, score))
+                # print('%s (score = %.5f)' % (human_string, score))
 
             return [(self.label_lines[node_id], predictions[0][node_id]) for node_id in top_k]
