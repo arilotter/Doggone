@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Toolbar as MaterialToolbar } from 'react-native-material-ui';
 
 export default class Toolbar extends Component {
+  _back = () => {
+    this.props.navigate('pop');
+  }
   render () {
-    const routes = this.props.navigator.getCurrentRoutes();
-    const title = routes[routes.length - 1].title;
-    const back = routes.length > 1 ? 'arrow-back' : '';
+    const back = 'arrow-back';
     return (
       <MaterialToolbar
         style={{ container: {
@@ -15,7 +16,8 @@ export default class Toolbar extends Component {
           right: 0
         }}}
         leftElement={back}
-        centerElement={title}
+        onLeftElementPress={this._back}
+        centerElement={this.props.scene.route.key}
       />
     );
   }

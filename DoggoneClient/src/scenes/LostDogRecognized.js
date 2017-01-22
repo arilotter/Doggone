@@ -10,8 +10,7 @@ class SceneLostDogRecognized extends Component {
   }
 
   openDogDetails (dog) {
-    this.props.navigator.forward('detail', null, {
-      parentProps: this.props,
+    this.props.navigate('push', {key: 'detail'}, {
       dog: dog
     });
   }
