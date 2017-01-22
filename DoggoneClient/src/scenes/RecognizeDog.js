@@ -18,6 +18,7 @@ class RecognizeDog extends Component {
       }))
       .then(response => response.json())
       .then(json => {
+        this.props.navigate.pop(); // remove self from stack
         this.props.navigate.push(this.props.next, {
           uuid: json.data_id,
           photo: this.props.imagePath,
