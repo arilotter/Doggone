@@ -12,9 +12,7 @@ export default class SceneHome extends Component {
           icon='photo-camera'
           style={{ container: styles.mainButton }}
           onPress={() => {
-            this.props.navigator.to('camera', {
-              nextScene: 'recognized'
-            });
+            this.props.navigator.to('camera');
           }}
         />
         <Button

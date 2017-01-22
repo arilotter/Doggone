@@ -32,7 +32,7 @@ class DogCard extends Component {
         />
         <View style={styles.textContainer}>
           <Text style={styles.cardTitle}>
-            {this.props.dog.name || this.props.dog.breed}
+            {this.props.dog.name || this.props.dog.usr_type}
           </Text>
         </View>
       </Card>

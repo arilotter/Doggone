@@ -192,6 +192,7 @@ export default class Navigate {
   */
   forward = (child, title, props, savedInstanceState) => {
     const current = this.navigator.getCurrentRoutes()[0].path;
+    console.log(this.navigator.getCurrentRoutes());
     const currentObject = this._getRouteObject(current);
 
     if (!currentObject.children || !Object.keys(currentObject.children).length) {

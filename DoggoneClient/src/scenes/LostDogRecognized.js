@@ -10,13 +10,17 @@ class SceneLostDogRecognized extends Component {
   }
 
   openDogDetails (dog) {
-    console.log(dog);
+    this.props.navigator.forward('detail', null, {
+      parentProps: this.props,
+      dog: dog
+    });
   }
 
   render () {
     const dogs = [{
       uuid: 'asdasfasdf',
       usr_type: 'American Staffordshire Terrier',
+      name: 'Buttman',
       photo: 'http://i.imgur.com/A79quK6.png'
     }, {
       uuid: 'asdflkjg4',

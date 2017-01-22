@@ -33,7 +33,7 @@ export default class DogGone extends Component {
         uiTheme={uiTheme}
       >
         <Navigator
-          initialRoute={Navigate.getInitialRoute()}
+          initialRoute={Navigate.getInitialRoute('home')}
           navigationBar={<Toolbar />}
           ref={navigator => { !this.state.nav ? this.setNavigator(navigator) : null; }}
           renderScene={(route) => {
