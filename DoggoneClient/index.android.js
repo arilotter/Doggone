@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, UIManager, NavigationExperimental, View } from 'react-native';
+import { AppRegistry, UIManager, NavigationExperimental, View, BackAndroid } from 'react-native';
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 import Toolbar from './src/components/Toolbar';
 
@@ -48,7 +48,25 @@ export default class DogGone extends Component {
     this._navigate = this._navigate.bind(this);
     this._renderScene = this._renderScene.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
+    this._handleBackAction = this._handleBackAction.bind(this);
   }
+
+  _handleBackAction () {
+    if (this.state.navState.index === 0) {
+      return BackAndroid.exitApp();
+    }
+    this._navigate('pop');
+    return true;
+  }
+
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction);
+  }
+
+  componentWillUnmount () {
+    BackAndroid.removeEventListener('hardwareBackPress', this._handleBackAction);
+  }
+
   render () {
     return (
       <ThemeProvider uiTheme={uiTheme}>
