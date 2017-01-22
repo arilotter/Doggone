@@ -1,7 +1,9 @@
 # API
 
-## `GET /find/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>`
+## `GET /find/<string:status>/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>`
 
+
+* `status`: "lost" || "found", which database to use
 * `longitude`: of your location
 * `latitude`: of your location
 * `radius`: search radius in **METRES!**
@@ -77,7 +79,7 @@ Returns data like:
 
 `data_id` is unique ID needed for next `/lost` and images (ie, `data_id.jpg`)
 
-## `POST /lost`
+## `POST /add/lost`
 
 * Send JSON data in this format:
 
@@ -95,6 +97,10 @@ Returns data like:
 ```
 
 Note that lat/lon are floats, and uuid is the `data_id` from `/upload`
+
+## `POST /add/found`
+
+* See above. Uses the `found` database.
 
 ## Getting images
 
