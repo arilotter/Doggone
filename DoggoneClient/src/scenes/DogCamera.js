@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { ActionButton } from 'react-native-material-ui';
+import FileSystem from 'react-native-filesystem';
 
 import Camera from 'react-native-camera';
+
+async function readFile(uri) {
+  const fileContents = await FileSystem.readFile(uri);
+  console.log(`read from file: ${fileContents}`);
+  }
 
 export default class DogCamera extends Component {
   render () {
