@@ -51,13 +51,11 @@ def get_task(status, longitude, latitude, radius, usr_type, rec_type):
 
         lon1 = float(dog.get("lon", 0))
         lat1 = float(dog.get("lat", 0))
-        type1 = dog.get("rec_type") # Recognized
-        type2 = dog.get("usr_type") # User specified
-        found = dog.get("found", False)
-        if found:
-            continue
+        type1 = str.replace(dog.get("rec_type"), "%20", " ") # Recognized
+        type2 = str.replace(dog.get("usr_type"), "%20", " ") # User specified
 
         distance = get_distance(lon1, lat1, float(longitude), float(latitude))
+        print("Distance: %d" % (distance,))
         if distance <= radius:
             if usr_type == "all" or usr_type == type1 or usr_type == type2 or rec_type == type1 or rec_type == type2:
                 dog["distance"] = int(distance)
