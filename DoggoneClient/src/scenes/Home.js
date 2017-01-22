@@ -23,7 +23,7 @@ export default class SceneHome extends Component {
             .then(image => {
               this.props.navigate.push('recognize', {
                 imagePath: image.path,
-                next: 'submit'
+                next: 'recognized'
               });
             })
             .catch(err => console.log(err));
