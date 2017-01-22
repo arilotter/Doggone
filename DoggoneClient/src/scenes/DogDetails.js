@@ -1,8 +1,18 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions, Image } from 'react-native';
+import { Button } from 'react-native-material-ui';
+import { phonecall } from 'react-native-communications';
 
 class DogDetails extends Component {
   render () {
+    const phone = this.props.dog.owner_phone ? (
+      <Button
+        raised accent
+        text='Call owner'
+        icon='phone'
+        onPress={() => phonecall(this.props.dog.owner_phone, false)}
+      />
+    ) : '';
     return (
       <View>
         <Image
@@ -13,6 +23,7 @@ class DogDetails extends Component {
         />
         <Text style={styles.infoText}>This dog is {this.props.dog.name ? 'named' : this.props.dog.usr_type}</Text>
         <Text style={styles.infoName}>{this.props.dog.name}</Text>
+        {phone}
       </View>
     );
   }

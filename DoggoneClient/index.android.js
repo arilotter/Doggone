@@ -7,7 +7,7 @@ global.backend = 'http://104.236.201.25'; // not all globals are evil!
 
 const uiTheme = {
   palette: {
-    primaryColor: COLOR.amber500,
+    primaryColor: COLOR.amber800,
     accentColor: COLOR.blueA200
   }
 };
@@ -31,14 +31,14 @@ export default class DogGone extends Component {
     this._renderScene = this._renderScene.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
     this._handleBackAction = this._handleBackAction.bind(this);
-    const thos = this;
+    const self = this;
     this._navigate = {
       push: (key, passProps) => {
-        thos.setState({
-          navState: NavigationStateUtils.push(thos.state.navState, {key, passProps})
+        self.setState({
+          navState: NavigationStateUtils.push(self.state.navState, {key, passProps})
         });
       },
-      pop: () => thos.setState({navState: NavigationStateUtils.pop(thos.state.navState)})
+      pop: () => self.setState({navState: NavigationStateUtils.pop(self.state.navState)})
     };
   }
 
@@ -93,6 +93,7 @@ export default class DogGone extends Component {
       'recognize': require('./src/scenes/RecognizeDog').default,
       'recognized': require('./src/scenes/LostDogRecognized').default,
       'detail': require('./src/scenes/DogDetails').default,
+      'thanks': require('./src/scenes/ThankYou').default,
       'submit': require('./src/scenes/SubmitDog').default
     }[props.scene.route.key];
     return <Scene navigate={this._navigate} {...props.scene.route.passProps} />;

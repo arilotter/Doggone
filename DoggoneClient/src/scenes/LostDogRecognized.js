@@ -24,6 +24,7 @@ class SceneLostDogRecognized extends Component {
     global.fetch(global.backend + `/find/lost/${global.lat}/${global.lon}/2000000/${this.state.breed || guessedType}/${guessedType}`)
       .then(response => response.json())
       .then(json => {
+        console.log(json);
         const dogCards = json.dogs.map(dog => (
           <DogCard
             key={dog.uuid}
@@ -31,19 +32,7 @@ class SceneLostDogRecognized extends Component {
             onPress={() => this.props.navigate.push('detail', { dog })}
           />
         ));
-        console.log(dogCards);
-        if (dogCards.length > 0) {
-          this.setState({ dogCards });
-        } else {
-          this.setState({ dogCards: [
-            <Text
-              key={"empty"}
-              style={styles.infoText}
-            >
-              No dogs of this breed have been reported missing.
-            </Text>
-          ]});
-        }
+        this.setState({ dogCards });
       })
       .catch(err => {
         console.log(err);
@@ -54,6 +43,14 @@ class SceneLostDogRecognized extends Component {
     this._fetch();
   }
   render () {
+    const cards = this.state.dogCards.length > 0 ? this.state.dogCards : (
+      <Text
+        key={"empty"}
+        style={styles.infoBreed}
+      >
+        No dogs of this breed have been reported missing.
+      </Text>
+    );
     return (
       <ScrollView>
         <Image
@@ -62,7 +59,7 @@ class SceneLostDogRecognized extends Component {
             uri: this.props.photo
           }}
         />
-        <Text style={styles.infoText}>This dog looks like a</Text>
+        <Text style={styles.infoText}>This dog has been recognized:</Text>
         <DogPicker
           value={this.state.breed}
           onValueChange={this._fetch}
@@ -70,7 +67,7 @@ class SceneLostDogRecognized extends Component {
           classification={this.props.classification}
           />
         <View style={styles.dogsContainer}>
-          {this.state.dogCards}
+          {cards}
         </View>
       </ScrollView>
     );
@@ -85,10 +82,10 @@ const styles = StyleSheet.create({
   infoText: {
     padding: 8,
     paddingBottom: 0,
-    fontSize: 32
+    fontSize: 26
   },
   infoBreed: {
-    fontSize: 48,
+    fontSize: 32,
     padding: 8,
     paddingTop: 0,
     color: 'black'

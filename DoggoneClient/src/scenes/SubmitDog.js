@@ -9,7 +9,7 @@ class SubmitDog extends Component {
     this.state = {
       name: '',
       friendly: false,
-      phone: '',
+      owner_phone: '',
       breed: this.props.classification.reduce((a, b) => a.confidence > b.confidence ? a : b).dog_type
     };
     this._onSubmit = this._onSubmit.bind(this);
@@ -26,16 +26,19 @@ class SubmitDog extends Component {
       lat: global.lat,
       lon: global.lon,
       friendly: this.state.friendly,
-      phone: this.state.phone
+      owner_phone: this.state.owner_phone
     };
     global.fetch(global.backend + '/add/lost', {
       method: 'POST',
       body: JSON.stringify(data)
-    }).then();
+    }).then(() => {
+      this.props.navigate.pop();
+      this.props.navigate.push('thanks');
+    });
   }
 
   _canSubmit () {
-    if (this.state.name && this.state.phone) {
+    if (this.state.name && this.state.owner_phone) {
       return true;
     }
     return false;
@@ -95,8 +98,8 @@ class SubmitDog extends Component {
           <TextInput
             style={styles.dogName}
             keyboardType='phone-pad'
-            onChangeText={phone => this.setState({phone})}
-            value={this.state.phone}
+            onChangeText={owner_phone => this.setState({owner_phone})}
+            value={this.state.owner_phone}
             underlineColorAndroid={'#2196F3'}
           />
         </Card>

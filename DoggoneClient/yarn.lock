@@ -2962,6 +2962,10 @@ react-deep-force-update@^1.0.0:
   version "0.4.1"
   resolved "https://github.com/lwansbrough/react-native-camera.git#d116d524429b520101748db69d2c7c1cace2cb41"
 
+react-native-communications@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
+
 react-native-fs@^2.1.0-rc.1:
   version v2.1.0-rc.1
   resolved "https://registry.yarnpkg.com/react-native-fs/-/react-native-fs-2.1.0-rc.1.tgz#f6078891005478648738db396e822ec0aefc4b95"
