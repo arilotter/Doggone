@@ -10,14 +10,7 @@ class SceneLostDogRecognized extends Component {
       dogCards: [],
       dogType: ''
     };
-    this.openDogDetails = this.openDogDetails.bind(this);
     this._fetch();
-  }
-
-  openDogDetails (dog) {
-    this.props.navigate.push('detail', {
-      dog
-    });
   }
 
   _fetch () {
@@ -28,7 +21,7 @@ class SceneLostDogRecognized extends Component {
           <DogCard
             key={dog.uuid}
             dog={dog}
-            onPress={() => this.openDogDetails(dog)}
+            onPress={() => this.props.navigate.push('detail', { dog })}
           />
         ));
         this.setState({ dogCards });
