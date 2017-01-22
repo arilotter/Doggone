@@ -20,6 +20,7 @@ class SceneBrowseDogs extends Component {
     global.fetch(global.backend + `/find/found/${global.lat}/${global.lon}/2000000/${breed}/${breed}`)
       .then(response => response.json())
       .then(json => {
+        console.log(json);
         const dogCards = json.dogs.map(dog => (
           <DogCard
             key={dog.uuid}

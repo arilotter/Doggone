@@ -45,13 +45,6 @@ export default class SceneHome extends Component {
             .catch(err => console.log(err));
           }}
         />
-        <Button
-          text='Browse lost dogs'
-          icon='search'
-          onPress={() => {
-            this.props.navigate.push('browse');
-          }}
-        />
       </View>
     );
   }

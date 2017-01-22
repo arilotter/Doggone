@@ -2,19 +2,26 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ScrollView, Dimensions } from 'react-native';
 
 import DogCard from '../components/DogCard';
+import DogPicker from '../components/DogPicker';
 
 class SceneLostDogRecognized extends Component {
   constructor (props) {
     super(props);
     this.state = {
       dogCards: [],
-      dogType: ''
+      breed: ''
     };
-    this._fetch();
+    this._fetch = this._fetch.bind(this);
   }
 
-  _fetch () {
-    global.fetch(global.backend + '/find/lost/39.953/-75.193/2000000/Terrier/Terrier')
+  _fetch (breed) {
+    const guessedType = this.props.classification.reduce((a, b) => a.confidence > b.confidence ? a : b).dog_type;
+    if (breed) {
+      this.setState({breed});
+    } else {
+      this.setState({ breed: guessedType });
+    }
+    global.fetch(global.backend + `/find/lost/${global.lat}/${global.lon}/2000000/${this.state.breed || guessedType}/${guessedType}`)
       .then(response => response.json())
       .then(json => {
         const dogCards = json.dogs.map(dog => (
@@ -24,16 +31,24 @@ class SceneLostDogRecognized extends Component {
             onPress={() => this.props.navigate.push('detail', { dog })}
           />
         ));
-        this.setState({ dogCards });
+        console.log(dogCards);
+        if (dogCards.length > 0) {
+          this.setState({ dogCards });
+        } else {
+          this.setState({ dogCards:<Text key={"empty"}>
+            No dogs of this breed have been reported missing.
+          </Text> });
+        }
       })
       .catch(err => {
         console.log(err);
       });
   }
 
+  componentDidMount () {
+    this._fetch();
+  }
   render () {
-    console.log(this.props.classification);
-    const breeds = this.props.classification.sort((a, b) => b.confidence - a.confidence);
     return (
       <ScrollView>
         <Image
@@ -43,7 +58,12 @@ class SceneLostDogRecognized extends Component {
           }}
         />
         <Text style={styles.infoText}>This dog looks like a</Text>
-        <Text style={styles.infoBreed}> {breeds[0].dog_type}</Text>
+        <DogPicker
+          value={this.state.breed}
+          onValueChange={this._fetch}
+          hideUnclassified
+          classification={this.props.classification}
+          />
         <View style={styles.dogsContainer}>
           {this.state.dogCards}
         </View>

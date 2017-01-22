@@ -54,9 +54,9 @@ export default class DogGone extends Component {
     BackAndroid.addEventListener('hardwareBackPress', this._handleBackAction);
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        global.lat = position.latitude;
-        global.lon = position.longitude;
-        console.log('GOT LOCATION');
+        global.lat = position.coords.latitude;
+        global.lon = position.coords.longitude;
+        console.log('GOT LOCATION!');
       },
       (error) => console.log(JSON.stringify(error)),
       {timeout: 20000, maximumAge: 1000}

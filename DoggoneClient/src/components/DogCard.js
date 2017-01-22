@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
   },
   card: {
     width: (Dimensions.get('window').width / 2) - 16,
-    maxWidth: 256,
+    maxWidth: 256
   },
   cardTitle: {
     fontSize: 26
@@ -26,7 +26,7 @@ class DogCard extends Component {
         style={{container: styles.card}}
       >
         <Image
-          source={{uri: 'http://104.236.201.25/woof/' + this.props.dog.uuid + '.jpg'}}
+          source={{uri: global.backend + '/woof/' + this.props.dog.uuid + '.jpg'}}
           style={styles.image}
         />
         <View style={styles.textContainer}>
