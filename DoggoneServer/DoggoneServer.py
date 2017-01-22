@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, send_from_directory
 from DoggoneUtils import *
 import os
 import sys
@@ -29,13 +29,11 @@ client = MongoClient('localhost', 27017)
 db_doggone = client.doggone
 db_lost = db_doggone.lost
 db_found = db_doggone.found
-
-
-
-@app.route('/find/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>', methods=['GET'])
-def get_task(longitude, latitude, radius, usr_type, rec_type):
+@app.route('/find/<string:status>/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>', methods=['GET'])
+def get_task(status, longitude, latitude, radius, usr_type, rec_type):
     found_dogs = []
-    for dog in db_lost.find():
+    db_select = db_lost if status == "lost" else db_found
+    for dog in db_select.find():
         if '_id' in dog:
             del(dog['_id'])
 
@@ -43,13 +41,16 @@ def get_task(longitude, latitude, radius, usr_type, rec_type):
         lat1 = float(dog.get("lat", 0))
         type1 = dog.get("rec_type") # Recognized
         type2 = dog.get("usr_type") # User specified
+        found = dog.get("found", False)
+        if found:
+            continue
 
         distance = get_distance(lon1, lat1, float(longitude), float(latitude))
         if distance <= radius:
-            if usr_type == type1 or usr_type == type2 or rec_type == type1 or rec_type == type2:
+            if usr_type == "all" or usr_type == type1 or usr_type == type2 or rec_type == type1 or rec_type == type2:
                 dog["distance"] = int(distance)
                 found_dogs.append(dog)
-
+    found_dogs = {"dogs": found_dogs}
     return json.dumps(found_dogs)
 
 @app.route('/upload', methods = ['POST'])
@@ -72,14 +73,23 @@ def upload():
             f.write(request.data)
         return json.dumps(dog_data)
 
-@app.route('/lost', methods=['POST'])
+@app.route('/add/lost', methods=['POST'])
 def add_lost_dog():
     dog_data = json.loads(request.data)
     mongobj = db_lost.insert_one(dog_data).inserted_id
     return str(mongobj)
 
+@app.route('/add/found', methods=['POST'])
+def add_found_dog():
+    dog_data = json.loads(request.data)
+    mongobj = db_found.insert_one(dog_data).inserted_id
+    return str(mongobj)
 
+
+@app.route('/woof/<path:path>')
+def send_js(path):
+    return send_from_directory(os.path.join(root_path(), 'woof'), path)
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8080)
