@@ -3,8 +3,7 @@ import { AppRegistry, UIManager, NavigationExperimental, View, BackAndroid } fro
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 import Toolbar from './src/components/Toolbar';
 
-import Home from './src/scenes/Home';
-import BrowseDogs from './src/scenes/BrowseDogs';
+global.backend = ''; // not all globals are evil!
 
 const uiTheme = {
   palette: {
@@ -20,42 +19,34 @@ const {
   StateUtils: NavigationStateUtils
 } = NavigationExperimental;
 
-function reducer (state, action, route) {
-  if (!state) {
-    return {
-      index: 0,
-      routes: [{key: 'home'}]
-    };
-  }
-  switch (action) {
-    case 'push': {
-      return NavigationStateUtils.push(state, route);
-    }
-    case 'pop': {
-      return NavigationStateUtils.pop(state);
-    }
-    default:
-      return state;
-  }
-}
-
 export default class DogGone extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      navState: reducer()
+      navState: {
+        index: 0,
+        routes: [{key: 'home'}]
+      }
     };
-    this._navigate = this._navigate.bind(this);
     this._renderScene = this._renderScene.bind(this);
     this._renderHeader = this._renderHeader.bind(this);
     this._handleBackAction = this._handleBackAction.bind(this);
+    const thos = this;
+    this._navigate = {
+      push: (key, passProps) => {
+        thos.setState({
+          navState: NavigationStateUtils.push(thos.state.navState, {key, passProps})
+        });
+      },
+      pop: () => thos.setState({navState: NavigationStateUtils.pop(thos.state.navState)})
+    };
   }
 
   _handleBackAction () {
     if (this.state.navState.index === 0) {
       return BackAndroid.exitApp();
     }
-    this._navigate('pop');
+    this._navigate.pop();
     return true;
   }
 
@@ -86,14 +77,14 @@ export default class DogGone extends Component {
   }
 
   _renderScene (props) {
-    const Component = {
+    const Scene = {
       'home': require('./src/scenes/Home').default,
       'browse': require('./src/scenes/BrowseDogs').default,
       'camera': require('./src/scenes/DogCamera').default,
       'recognized': require('./src/scenes/LostDogRecognized').default,
       'detail': require('./src/scenes/DogDetails').default
     }[props.scene.route.key];
-    return <Component navigate={this._navigate} {...this.state.componentProps} />;
+    return <Scene navigate={this._navigate} {...props.scene.route.passProps} />;
   }
 
   _renderHeader (sceneProps) {
@@ -103,11 +94,6 @@ export default class DogGone extends Component {
         {...sceneProps}
       />
     );
-  }
-
-  _navigate (action, route, componentProps) {
-    const navState = reducer(this.state.navState, action, route);
-    this.setState({ navState, componentProps });
   }
 }
 

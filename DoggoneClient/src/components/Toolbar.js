@@ -3,7 +3,7 @@ import { Toolbar as MaterialToolbar } from 'react-native-material-ui';
 
 export default class Toolbar extends Component {
   _back = () => {
-    this.props.navigate('pop');
+    this.props.navigate.pop();
   }
   render () {
     const back = 'arrow-back';

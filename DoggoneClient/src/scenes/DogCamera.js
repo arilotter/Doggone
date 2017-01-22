@@ -31,8 +31,7 @@ export default class DogCamera extends Component {
   takePicture () {
     this.camera.capture()
       .then(photo => {
-        console.log(photo.path);
-        this.props.navigate('push', {key: 'recognized'}, {
+        this.props.navigate.push('recognized', {
           photo: photo.path,
           breed: 'Big ol pupper'
         });

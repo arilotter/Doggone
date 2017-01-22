@@ -12,7 +12,7 @@ export default class SceneHome extends Component {
           icon='photo-camera'
           style={{ container: styles.mainButton }}
           onPress={() => {
-            this.props.navigate('push', {key: 'camera'});
+            this.props.navigate.push('camera');
           }}
         />
         <Button
@@ -25,7 +25,7 @@ export default class SceneHome extends Component {
           text='Browse lost dogs'
           icon='search'
           onPress={() => {
-            this.props.navigate('push', {key: 'browse'});
+            this.props.navigate.push('browse');
           }}
         />
       </View>
