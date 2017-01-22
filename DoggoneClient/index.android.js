@@ -81,8 +81,10 @@ export default class DogGone extends Component {
       'home': require('./src/scenes/Home').default,
       'browse': require('./src/scenes/BrowseDogs').default,
       'camera': require('./src/scenes/DogCamera').default,
+      'recognize': require('./src/scenes/RecognizeDog').default,
       'recognized': require('./src/scenes/LostDogRecognized').default,
-      'detail': require('./src/scenes/DogDetails').default
+      'detail': require('./src/scenes/DogDetails').default,
+      'submit': require('./src/scenes/SubmitDog').default
     }[props.scene.route.key];
     return <Scene navigate={this._navigate} {...props.scene.route.passProps} />;
   }

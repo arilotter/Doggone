@@ -2969,6 +2969,10 @@ react-native-fs@^2.1.0-rc.1:
     base-64 "^0.1.0"
     utf8 "^2.1.1"
 
+react-native-image-crop-picker@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.12.1.tgz#a811423d80ac66fab44707e3aee24fb94e5d11f8"
+
 react-native-material-design-styles@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/react-native-material-design-styles/-/react-native-material-design-styles-0.2.6.tgz#2039f638fd11f1e340db7b39ea81ad07f6d81ff0"

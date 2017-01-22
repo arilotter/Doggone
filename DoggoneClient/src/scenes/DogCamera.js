@@ -33,7 +33,6 @@ export default class DogCamera extends Component {
     this.camera.capture()
       .then(photo => {
         this.photo = photo;
-        console.log(photo);
         return RNFS.readFile(photo.path, 'base64');
       })
       .then(base64 => global.fetch(global.backend + '/upload', {

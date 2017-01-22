@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 
 export default class DogGone extends Component {
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
