@@ -34,11 +34,11 @@ db_found = db_doggone.found
 
 @app.route('/')
 def index():
-    return send_from_directory(os.path.join(root_path(), 'index.htm'))
+    return send_from_directory(os.path.join(root_path(), 'site/'), 'index.htm')
 
 @app.route('/assets/<path:path>')
 def send_assets(path):
-    return send_from_directory(os.path.join(root_path(), 'assets'), path)
+    return send_from_directory(os.path.join(root_path(), 'site/', 'assets'), path)
 
 
 @app.route('/find/<string:status>/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>', methods=['GET'])
