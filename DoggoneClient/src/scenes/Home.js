@@ -5,6 +5,12 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 export default class SceneHome extends Component {
   render () {
+    const pickerOptions = {
+      width: 640,
+      height: 480,
+      cropping: true,
+      compressImageQuality: 0.6
+    };
     return (
       <View>
         <Button
@@ -13,7 +19,13 @@ export default class SceneHome extends Component {
           icon='photo-camera'
           style={{ container: styles.mainButton }}
           onPress={() => {
-            this.props.navigate.push('camera');
+            ImagePicker.openCamera(pickerOptions)
+            .then(image => {
+              this.props.navigate.push('recognize', {
+                imagePath: image.path,
+                next: 'submit'
+              });
+            });
           }}
         />
         <Button
@@ -22,10 +34,8 @@ export default class SceneHome extends Component {
           icon='insert-photo'
           style={{ container: styles.mainButton }}
           onPress={() => {
-            ImagePicker.openPicker({
-              cropping: true
-            })
-            .then((image) => {
+            ImagePicker.openPicker(pickerOptions)
+            .then(image => {
               this.props.navigate.push('recognize', {
                 imagePath: image.path,
                 next: 'submit'
