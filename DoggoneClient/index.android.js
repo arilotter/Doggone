@@ -3,7 +3,7 @@ import { AppRegistry, UIManager, NavigationExperimental, View, BackAndroid } fro
 import { COLOR, ThemeProvider } from 'react-native-material-ui';
 import Toolbar from './src/components/Toolbar';
 
-global.backend = ''; // not all globals are evil!
+global.backend = 'http://104.236.201.25'; // not all globals are evil!
 
 const uiTheme = {
   palette: {

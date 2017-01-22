@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { ActionButton } from 'react-native-material-ui';
-import FileSystem from 'react-native-filesystem';
+import RNFS from 'react-native-fs';
 
 import Camera from 'react-native-camera';
-
-async function readFile(uri) {
-  const fileContents = await FileSystem.readFile(uri);
-  console.log(`read from file: ${fileContents}`);
-  }
 
 export default class DogCamera extends Component {
   render () {
@@ -37,9 +32,21 @@ export default class DogCamera extends Component {
   takePicture () {
     this.camera.capture()
       .then(photo => {
+        this.photo = photo;
+        console.log(photo);
+        return RNFS.readFile(photo.path, 'base64');
+      })
+      .then(base64 => global.fetch(global.backend + '/upload', {
+        method: 'POST',
+        body: base64
+      }))
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
         this.props.navigate.push('recognized', {
-          photo: photo.path,
-          breed: 'Big ol pupper'
+          uuid: json.data_id,
+          photo: this.photo.path,
+          classification: json.classify
         });
       })
       .catch(err => console.log(err));
