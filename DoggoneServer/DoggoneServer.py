@@ -34,7 +34,7 @@ db_found = db_doggone.found
 
 @app.route('/')
 def index():
-    return send_from_directory(os.path.join(root_path(), 'index.htm')
+    return send_from_directory(os.path.join(root_path(), 'index.htm'))
 
 @app.route('/assets/<path:path>')
 def send_js(path):
