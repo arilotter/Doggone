@@ -32,7 +32,7 @@ export default class DogCamera extends Component {
     this.camera.capture()
       .then(photo => {
         console.log(photo.path);
-        this.props.navigator.forward(null, null, {
+        this.props.navigate('push', {key: 'recognized'}, {
           photo: photo.path,
           breed: 'Big ol pupper'
         });
