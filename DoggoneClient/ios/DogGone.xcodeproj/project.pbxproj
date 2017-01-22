@@ -34,6 +34,7 @@
 		05C05E34C8854540A0D3D85A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6DC37A072C485D8D570E43 /* Octicons.ttf */; };
 		E546208B7786470BB567D524 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D043FE1BECC406F94B9CD10 /* SimpleLineIcons.ttf */; };
 		A648D48209BD42CAA0E974D9 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4D5BF812173C45ABAC55555C /* Zocial.ttf */; };
+		98462C631109416DBAA3EFA3 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A06ADE4389E447DEBA0EA06A /* libRNFS.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -257,6 +258,8 @@
 		8C6DC37A072C485D8D570E43 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4D043FE1BECC406F94B9CD10 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4D5BF812173C45ABAC55555C /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		49D35805D87F4A5F8C2AD5DE /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A06ADE4389E447DEBA0EA06A /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +288,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				DAC6B05223F34FC7A8FA128A /* libRCTCamera.a in Frameworks */,
 				063F61E19D48456AB416A6EE /* libRNVectorIcons.a in Frameworks */,
+				98462C631109416DBAA3EFA3 /* libRNFS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +435,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				E45C94D39E5F42138D5CB1B4 /* RCTCamera.xcodeproj */,
 				F5F9E5D335574971A8FB04D2 /* RNVectorIcons.xcodeproj */,
+				49D35805D87F4A5F8C2AD5DE /* RNFS.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -881,8 +886,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DogGone.app/DogGone";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -899,8 +902,6 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DogGone.app/DogGone";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;

@@ -7,8 +7,9 @@ class SceneLostDogRecognized extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      dogCards: []
-    }
+      dogCards: [],
+      dogType: ''
+    };
     this.openDogDetails = this.openDogDetails.bind(this);
     this._fetch();
   }
@@ -20,11 +21,9 @@ class SceneLostDogRecognized extends Component {
   }
 
   _fetch () {
-    fetch('http://104.236.201.25/find/lost/39.953/-75.193/2000000/Terrier/Terrier')  
-     .then((response) => {
-        return response.json();
-      })
-     .then(json => {
+    global.fetch(global.backend + '/find/lost/39.953/-75.193/2000000/Terrier/Terrier')
+      .then(response => response.json())
+      .then(json => {
         const dogCards = json.dogs.map(dog => (
           <DogCard
             key={dog.uuid}
@@ -32,7 +31,7 @@ class SceneLostDogRecognized extends Component {
             onPress={() => this.openDogDetails(dog)}
           />
         ));
-        this.setState({ dogCards })
+        this.setState({ dogCards });
       })
       .catch(err => {
         console.log(err);
@@ -40,22 +39,8 @@ class SceneLostDogRecognized extends Component {
   }
 
   render () {
-    /*const dogs = [{
-      uuid: '6e95e91c-e041-11e6-9609-3eacf89e45ff',
-      usr_type: 'American Staffordshire Terrier',
-      name: 'Buttman Long Long Name',
-      photo: 'http://i.imgur.com/A79quK6.png'
-    }, {
-      uuid: '19acabf8-e022-11e6-b889-b8e85642309e',
-      usr_type: 'Corgi',
-      photo: 'http://i.imgur.com/A79quK6.png'
-    }, {
-      uuid: '4cb2585e-e040-11e6-9609-3eacf89e45ff',
-      name: 'Borkley',
-      usr_type: 'Chihuahua',
-      photo: 'http://i.imgur.com/A79quK6.png'
-    }]; // TODO IMLPEMENT API HERE*/
-
+    console.log(this.props.classification);
+    const breeds = this.props.classification.sort((a, b) => b.confidence - a.confidence);
     return (
       <ScrollView>
         <Image
@@ -65,7 +50,7 @@ class SceneLostDogRecognized extends Component {
           }}
         />
         <Text style={styles.infoText}>This dog looks like a</Text>
-        <Text style={styles.infoBreed}> {this.props.breed}</Text>
+        <Text style={styles.infoBreed}> {breeds[0].dog_type}</Text>
         <View style={styles.dogsContainer}>
           {this.state.dogCards}
         </View>
@@ -93,12 +78,8 @@ const styles = StyleSheet.create({
   dogsContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start',
+    alignItems: 'flex-start'
   }
 });
-
-SceneLostDogRecognized.propTypes = {
-  photo: React.PropTypes.string.isRequired
-};
 
 export default SceneLostDogRecognized;
