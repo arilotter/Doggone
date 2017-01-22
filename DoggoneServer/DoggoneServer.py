@@ -6,6 +6,7 @@ import uuid
 import json
 from json import encoder
 import pymongo
+from base64 import b64decode
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -29,6 +30,17 @@ client = MongoClient('localhost', 27017)
 db_doggone = client.doggone
 db_lost = db_doggone.lost
 db_found = db_doggone.found
+
+
+@app.route('/')
+def index():
+    return send_from_directory(os.path.join(root_path(), 'index.htm'))
+
+@app.route('/assets/<path:path>')
+def send_js(path):
+    return send_from_directory(os.path.join(root_path(), 'assets'), path)
+
+
 @app.route('/find/<string:status>/<string:longitude>/<string:latitude>/<int:radius>/<string:usr_type>/<string:rec_type>', methods=['GET'])
 def get_task(status, longitude, latitude, radius, usr_type, rec_type):
     found_dogs = []
@@ -58,7 +70,8 @@ def upload():
     if request.method == 'POST':
         data_id = str(uuid.uuid1())
         classification = []
-        for dog_type, confidence in imagenet.classify(request.data):
+        data = b64decode(request.data)
+        for dog_type, confidence in imagenet.classify(data):
             classification.append({
                 "dog_type": dog_type.title(),
                 "confidence": str(format(confidence, '0.3f'))
@@ -70,7 +83,7 @@ def upload():
         }
 
         with open(os.path.join(root_path(), "woof", data_id + ".jpg"), "wb") as f:
-            f.write(request.data)
+            f.write(data)
         return json.dumps(dog_data)
 
 @app.route('/add/lost', methods=['POST'])
