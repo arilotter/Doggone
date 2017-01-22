@@ -8,10 +8,10 @@ class DogDetails extends Component {
         <Image
           style={styles.dogPhoto}
           source={{
-            uri: 'https://server.com/woof/' + this.props.dog.uuid + '.jpg'
+            uri: global.backend + '/woof/' + this.props.dog.uuid + '.jpg'
           }}
         />
-        <Text style={styles.infoText}>This dog is</Text>
+        <Text style={styles.infoText}>This dog is {this.props.dog.name ? 'named' : this.props.dog.usr_type}</Text>
         <Text style={styles.infoName}>{this.props.dog.name}</Text>
       </View>
     );
