@@ -2958,6 +2958,10 @@ react-deep-force-update@^1.0.0:
   version "0.4.1"
   resolved "https://github.com/lwansbrough/react-native-camera.git#d116d524429b520101748db69d2c7c1cace2cb41"
 
+react-native-filesystem@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-filesystem/-/react-native-filesystem-0.1.0.tgz#b66eebbfa046ac12cb5d2503eda78641fca58c23"
+
 react-native-material-design-styles@^0.2.6:
   version "0.2.6"
   resolved "https://registry.yarnpkg.com/react-native-material-design-styles/-/react-native-material-design-styles-0.2.6.tgz#2039f638fd11f1e340db7b39ea81ad07f6d81ff0"
