@@ -25,7 +25,8 @@ export default class SceneHome extends Component {
                 imagePath: image.path,
                 next: 'submit'
               });
-            });
+            })
+            .catch(err => console.log(err));
           }}
         />
         <Button
@@ -40,7 +41,8 @@ export default class SceneHome extends Component {
                 imagePath: image.path,
                 next: 'submit'
               });
-            });
+            })
+            .catch(err => console.log(err));
           }}
         />
         <Button
