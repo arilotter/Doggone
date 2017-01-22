@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
 import RNFS from 'react-native-fs';
 
 // takes an imagePath prop
@@ -29,12 +29,22 @@ class RecognizeDog extends Component {
   render () {
     return (
       <View>
-        <Image source={{
-          uri: this.props.imagePath
-        }} />
+        <Image
+          source={{
+            uri: this.props.imagePath
+          }}
+          style={styles.dogPhoto}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  dogPhoto: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height
+  }
+});
 
 export default RecognizeDog;
