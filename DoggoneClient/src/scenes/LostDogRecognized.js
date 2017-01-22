@@ -35,9 +35,14 @@ class SceneLostDogRecognized extends Component {
         if (dogCards.length > 0) {
           this.setState({ dogCards });
         } else {
-          this.setState({ dogCards:<Text key={"empty"}>
-            No dogs of this breed have been reported missing.
-          </Text> });
+          this.setState({ dogCards: [
+            <Text
+              key={"empty"}
+              style={styles.infoText}
+            >
+              No dogs of this breed have been reported missing.
+            </Text>
+          ]});
         }
       })
       .catch(err => {
