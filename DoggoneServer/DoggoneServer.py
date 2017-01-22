@@ -37,7 +37,7 @@ def index():
     return send_from_directory(os.path.join(root_path(), 'index.htm'))
 
 @app.route('/assets/<path:path>')
-def send_js(path):
+def send_assets(path):
     return send_from_directory(os.path.join(root_path(), 'assets'), path)
 
 
@@ -100,7 +100,7 @@ def add_found_dog():
 
 
 @app.route('/woof/<path:path>')
-def send_js(path):
+def send_woof(path):
     return send_from_directory(os.path.join(root_path(), 'woof'), path)
 
 
